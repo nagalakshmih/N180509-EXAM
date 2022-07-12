@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>registration</title>
+        <link rel="stylesheet" href="bj.css">
+        
+    </head>
+    <body>
+        <div class="container">
+        
+       <center> 
+        <div class="form">
+            <div id="head"  ><h1 id="h1">F1H20</h1> <p id="h1">RGUKT</p></div>
+            <form action="bharu.php" onsubmit="return validate()">
+                <table>
+                    <tr>
+                        <td><lable>USER NAME</lable></td>
+                        <td><input type="text" id="user"></td>
+                    </tr>
+                    <tr>
+                        <td><lable>E-MAIL</lable></td>
+                        <td><input type="text" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td><lable>PHONE NUMBER</lable></td>
+                        <td><input type="text" id="ph"></td>
+                    </tr>
+                    <tr>
+                        <td>COUNTRY</td>
+                        <td>
+                            <select id="country">
+                                <option>INDIA</option>
+                                <option>AMERIA</option>
+                                <option>ENGLAND</option>
+                                <option>GERMANY</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="">FEE PAYMENT</label></td>
+                        <td>DD Number <input type="radio" value='r1' name="r1" id="dd">
+                             Account Number <input type="radio" value='r2' name="r1" id="ac"><br><input type='text' id="account"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="">ACCOMEDATION</label></td>
+                        <td>NUZIVD <input type="radio" name="r2" id="nuz">
+                            KADAPA<input type="radio" name="r2" id="ong"><br>
+                             ONGOLE<input type="radio" name="r2" id="rkv">
+                            SRIKAKULAM <input type="radio" name="r2" id="skv">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="">FOOD</label></td>
+                        <td>BREAKFAST <input type="checkbox" id="">
+                            LUNCH <input type="checkbox" id=""><br>
+                            SNACKS <input type="checkbox" id="">
+                            TEA <input type="checkbox" id="">
+                            COFFEE <input type="checkbox" id="">
+                            EGGS <input type="checkbox" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>NUMBER OF DAYS TO STAY</td>
+                        <td><input type="text" id='days'></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" id="submit"> </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <script>
+            let i=0;
+            function change(){
+                var images = ["images/collage.avif", "images/ground.jpg", "images/rgukt.png", "images/students.jpeg"];
+                document.body.setAttribute('style','background-image:url('+images[i]+')');
+
+                i=(i+1)%images.length;
+            }
+            setInterval(change,1000);
+            var head=document.getElementById('head')
+            function heading(){
+                head.style.backgroundColor='green';
+                document.getElementById('h1').style.color='yellow';
+            }
+            function remove(){
+                document.getElementById('head').style.backgroundColor='blue';
+                document.getElementById('h1').style.color='white';
+                
+            }
+            head.addEventListener('mouseover',heading)
+            head.addEventListener('mouseout',remove)
+            var user=document.getElementById('user');
+            var email=document.getElementById('email');
+            var ph=document.getElementById('ph');
+            var country=document.getElementById('country');
+            var dd=document.getElementById('dd');
+            var ac=document.getElementById('ac');
+            var fee=document.getElementById('account');
+            var nuz=document.getElementById('nuz');
+            var ong=document.getElementById('ong');
+            var rkv=document.getElementById('rkv');
+            var sklm=document.getElementById('skv');
+            var day=document.getElementById('days');
+            var userpattern=/^[F][a-zA-Z]+$/
+            var emailpatter=/^[a-zA-Z]+[A-Za-z0-9]*@[a-zA-Z]+\.([a-zA-Z]\.)*(com||in||net||edu)+$/
+            var indpattern=/^977\d{7}$/
+            var uspattern=/\d{4}-\d{4}-\d{4}/
+            var ddpattern=/^(SBIN||sbin)\d{7}$/
+            var acpattern=/\d{11}/
+            var amount=0
+            function validate(){
+                var name=user.value.toUpperCase();
+                if(userpattern.test(name)==false || name.length<4){
+                    
+                    console.log(nuz.checked)
+                    user.style.border='1px solid red';
+                    return false;
+                }
+                if(name.length>10){
+                    user.style.border='1px solid red';
+                    return false;
+                }
+                if(emailpattern.test(email.value)==false){
+                    email.style.border='1px solid red';
+                    return false;
+                }
+                else{
+                    email.style.border='1px solid black';
+                }
+                if(indpattern.test(ph.value)==false && uspattern.test(ph.value)==false){
+                    ph.style.border='1px solid red';
+                    return false;
+                }
+                if(dd.checked){
+                    if(ddpattern.test(fee.value)==false){
+                        fee.style.border='1px solid red';
+                        return false;
+                    }
+                }
+                if(ac.checked){
+                    if(acpattern.test(fee.value)==false){
+                        fee.style.border='1px solid red';
+                        return false;
+                    }
+                }
+                if(country.value!='India'){
+                    confirm('would you like to have a beer');
+                }
+                if(nuz.checked==true){
+                    amount=day.value*2000;
+                }
+                if(rkv.checked==true){
+                    amount=(day.value*2000);
+                }
+                if(ong.checked==true){
+                    amount=(day.value*3000);
+                }
+                if(sklm.checked==true){
+                    amount=(day.value*3000);
+                }
+                
+                alert('details\nfee:'+amount);
+                return true;
+            }
+        </script>
+    </body>
+</html>
